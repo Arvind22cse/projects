@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CGPA Calculator</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+   background: linear-gradient(skyblue,lightgreen);
+   
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+   animation: 3s linear 0s infinite running myColorChange;
+}
+@keyframes myColorChange{
+    20%{
+        background:linear-gradient(rgb(248, 4, 4),rgb(255, 252, 252));
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    40%{
+        background:linear-gradient(rgb(172, 136, 7),rgb(183, 183, 179));
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    60%{
+        background:linear-gradient(rgb(3, 146, 12),rgb(154, 189, 154));
+        background-repeat: no-repeat;
+        background-attachment: fixed;    
+    }
+    80%{background:linear-gradient(rgb(4, 32, 248),rgb(179, 181, 211));
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    100%{
+        background:linear-gradient(rgb(182, 137, 137),rgb(0, 255, 238));
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color:transparent;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+#input{
+    width:200px;
+}
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+#table-container {
+    text-align: center;
+    margin-top: 20px;
+}
+#picture{
+    width: 200px;
+}
+button {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: solid black;
+    background-color:black;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: transparent;
+
+
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: transparent;
+    color: rgb(0, 0, 0);
+}
+
+input[type="text"], input[type="number"] {
+    padding: 8px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+input[type="number"] {
+    width: calc(100% - 16px);
+}
+
+.grade-input {
+    text-transform: uppercase;
+}
+
+.grade-input:focus {
+    border-color: #4CAF50;
+}
+
+.grade-input::placeholder {
+    color: #aaa;
+}
+
+.result {
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+}
+
+</style>
+</head>
+<body id="body">
+
+<div class="container">
+    <h1>CGPA Calculator</h1>
+
+    <div id="table-container">
+        <label for="name" >SUBJECT:</label>
+        <input type="number" placeholder="enter the number of subjects in this semester" id="sub" style="margin-bottom: 20px; width:50vh"><br><br>
+        <button onclick="addSemester()">Add Semester</button>
+        <button onclick="calculateCGPA()">Calculate CGPA</button><br><br>
+        <img src = "click-Photoroom.png" id = "picture" alt = "Heading Image"><br><br>
+        <input type="text" id="input" onfocus="TextSize()" placeholder="enter your feedback">
+    </div>
+
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+    function TextSize() {
+        var element = document.getElementById("input");
+      
+          element.style.fontSize = "40px"; 
+          element.style.color="red";
+          element.style.width="600px";
+          element.style.fontFamily="Algerian";
+      }
+    window.addEventListener( "load", start, false );
+	
+	function start()
+	{
+	document.getElementById("picture").addEventListener("mouseover", over, false );
+	document.getElementById("picture").addEventListener("mouseout", out, false );
+	}
+
+	function over(e)
+	{
+	 document.getElementById("picture").setAttribute( "src", "Up.png");
+     //document.body.style.backgroundImage = "i1.jpg";
+    }
+
+	function out(e)
+	{
+        e.target.setAttribute( "src", "thum.png");
+   
+	}
+let semesterCount = 0;
+
+function addSemester() {
+
+    const container = document.getElementById("table-container");
+    semesterCount++;
+
+    const table = document.createElement("table");
+    table.id = "semester-" + semesterCount;
+
+    const headerRow = document.createElement("tr");
+    const header1 = document.createElement("th");
+
+    header1.textContent = "Subject";
+    const header2 = document.createElement("th");
+    header2.textContent = "Grade";
+    const header3 = document.createElement("th");
+    header3.textContent = "Credit";
+
+    headerRow.appendChild(header1);
+    headerRow.appendChild(header2);
+    headerRow.appendChild(header3);
+    table.appendChild(headerRow);
+
+    const subjectsCount = document.getElementById("sub").value;
+    if (isNaN(subjectsCount) || subjectsCount <= 0) {
+        alert("Invalid number of subjects. Please enter a valid number.");
+        return;
+    }
+
+    for (let i = 1; i <= subjectsCount; i++) {
+        const row = document.createElement("tr");
+        const subjectCell = document.createElement("td");
+      //  const subjectCell = document.createElement("td");
+        a=window.prompt(`Enter the subject ${i}`);
+        subjectCell.textContent = a;
+        //subjectCell.textContent = "Subject " + i;
+        const gradeCell = document.createElement("td");
+        const gradeInput = document.createElement("input");
+        gradeInput.type = "text";
+        gradeInput.classList.add("grade-input");
+        gradeInput.setAttribute("onblur", "validateInputs()");
+        gradeCell.appendChild(gradeInput);
+        const creditCell = document.createElement("td");
+        const creditInput = document.createElement("input");
+        creditInput.type = "number";
+        creditInput.min = 0;
+        creditInput.step = 0.5;
+        creditInput.setAttribute("onblur", "validateInputs()");
+        creditCell.appendChild(creditInput);
+
+        row.appendChild(subjectCell);
+        row.appendChild(gradeCell);
+        row.appendChild(creditCell);
+        table.appendChild(row);
+    }
+
+    container.appendChild(table);
+}
+
+function calculateGPA(semesterTable) {
+     let totalCredit = 0;
+    let totalGradePoints = 0;
+
+    const rows = semesterTable.querySelectorAll("tr");
+    rows.forEach((row, index) => {
+        if (index !== 0) {
+            const gradeInput = row.querySelector("input[type='text']");
+            const creditInput = row.querySelector("input[type='number']");
+
+            const grade = gradeInput.value.trim();
+            const credit = parseFloat(creditInput.value);
+
+            let gradePoint;
+
+            // Assign grade points based on the grade
+            switch (grade.toUpperCase()) {
+                case "O":
+                    gradePoint = 10.0;
+                    break;
+                case "A+":
+                    gradePoint = 9.0;
+                    break;
+                case "A":
+                    gradePoint = 8.0;
+                    break;
+                case "B+":
+                    gradePoint = 7.0;
+                    break;
+                case "B":
+                    gradePoint = 6.0;
+                    break;
+                case "C":
+                    gradePoint = 0.0;
+                    break;
+                default:
+                    gradePoint = 0.0;
+                    break;
+            }
+
+            totalCredit += credit;
+            totalGradePoints += gradePoint * credit;
+        }
+    });
+
+    return totalGradePoints / totalCredit;
+}
+
+
+
+function calculateCGPA() {
+    /* Calculation function remains unchanged */
+const tables = document.querySelectorAll("table");
+    let cgpaSum = 0;
+
+    let result = "";
+    tables.forEach((table, index) => {
+        const semesterGPA = calculateGPA(table);
+        cgpaSum += semesterGPA;
+        const cgpa = cgpaSum / (index + 1);
+        result += "Semester " + (index + 1) + " GPA: " + semesterGPA.toFixed(2) + ", CGPA: " + cgpa.toFixed(2) + "<br>";
+    });
+
+    document.getElementById("result").innerHTML = result;
+}
+
+function validateInputs() {
+     const inputs = document.querySelectorAll("input[type='text'], input[type='number']");
+    inputs.forEach(input => {
+        if (input.value.trim() === "") {
+            input.style.borderColor = "red";
+        } else {
+            input.style.borderColor = "#ddd";
+        }
+    });
+}
+
+/*document.body.addEventListener("mouseover", function() {
+    this.style.backgroundPosition = "bottom";
+});
+
+document.body.addEventListener("mouseout", function() {
+    this.style.backgroundPosition = "center";
+});
+
+document.body.addEventListener("focus", function() {
+    this.style.backgroundColor="yellow";
+    this.style.backgroundSize = "cover";
+    this.style.transition = "background 0.3s ease";
+});
+
+document.body.addEventListener("blur", function() {
+    this.style.backgroundColor="red";
+    this.style.backgroundSize = "cover";
+    this.style.transition = "background 0.3s ease";
+});
+*/
+</script>
+
+</body>
+</html>
