@@ -1,0 +1,99 @@
+<html>
+<head>
+    <title>form</title>
+    <style>
+    fieldset {
+      background: linear-gradient(rgb(80, 83, 84),rgb(237, 241, 237));
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+      }
+      body{
+        background-color:black;
+        
+      }
+      legend
+      {
+        background-color: white;
+      }
+    </style>
+</head>
+<body>
+<form action="thank.html">
+
+<fieldset>
+<legend style=" font-family:Algerian;font-size: 30px;">FORM VALIDATION</legend>
+<label for="name" style="Gill Sans Extrabold,sans-serif ; " >FIRST NAME:</label>
+<input type="text" name="name" id="name" placeholder="enter the first name" required><br><br>
+<label for="lname" style="Gill Sans Extrabold,sans-serif ">LAST NAME: </label>
+<input type="text" name="lname" id="lname" placeholder="enter the last name" required><br><br>
+<label for="gen" style="Gill Sans Extrabold,sans-serif ">Gender: </label><br>
+<input type ="radio" name="gen" ><label style="Gill Sans Extrabold,sans-serif ">MALE</label>
+<input type ="radio" name="gen"> <label style="Gill Sans Extrabold,sans-serif">FEMALE</label><br><br>
+<label for="birthday" style="Gill Sans Extrabold,sans-serif " >DATE OF BIRTH:</label>
+<input type="date" id="birthday" name="birthday"><br><br>
+<label for="email" style="Gill Sans Extrabold,sans-serif  " >E-MAIL:</label>
+<input type ="text" name="email" placeholder="@gmail.com" required><br><br>
+<label for="pass" style="Gill Sans Extrabold,sans-serif ">Password:</label>
+<input type="password" id="myInput" maxlength="10" placeholder="only 10 characters or number" required><br><br>
+<input type="checkbox" onclick="myFunction()">
+<label for="pass" style="Gill Sans Extrabold,sans-serif ">Show Password</label>
+<script>
+function myFunction() {
+  var x = document.getElementById("myInput");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>
+<br><br>
+<label for="phon" style="Gill Sans Extrabold,sans-serif ">Mobile Number:</label>
+<input type="text" id="txtMobileNumber" >
+<span id="lblError" class="error"></span>
+<input type="button" value="Submit" onclick="ValidateMobileNumber()" >
+<script type="text/javascript">
+    function ValidateMobileNumber() {
+        var mobileNumber = document.getElementById("txtMobileNumber").value;
+        var lblError = document.getElementById("lblError");
+        lblError.innerHTML = "";
+        var expr = /^(0|91)?[6-9][0-9]{9}$/;
+        if (!expr.test(mobileNumber)) {
+            lblError.innerHTML = "Invalid Mobile Number.";
+        }
+        else
+        {
+            lblError.innerHTML = "Valid";
+        }
+    }
+</script>
+<br>
+<br>
+<label for ="branch" style="Gill Sans Extrabold,sans-serif ">BRANCH</label>
+<select id="branch" name="branch">
+<option value="cse" style="Gill Sans Extrabold,sans-serif ">CSE</option>
+<option value="IT" style="Gill Sans Extrabold,sans-serif ">IT</option>
+<option value="CSD" style="Gill Sans Extrabold,sans-serif ">CSD</option>
+<option value="EEE" style="Gill Sans Extrabold,sans-serif ">EEE</option>
+<option value="ECE" style="Gill Sans Extrabold,sans-serif ">ECE</option>
+<option value="AIDS" style="Gill Sans Extrabold,sans-serif ">AIDS</option></select><br><br>
+<label for="sk" style="Gill Sans Extrabold,sans-serif ">SKILL SET</label><br>
+<input type="checkbox"> <label style="Gill Sans Extrabold,sans-serif ">APP DEVELOPING</label><br>
+<input type="checkbox" ><label style="Gill Sans Extrabold,sans-serif ">GAME DEVELOPING</label><br>
+<input type="checkbox" ><label style="Gill Sans Extrabold,sans-serif ">WEB PAGE DEVELOPING</label><br><br>
+<label for="add" style="Gill Sans Extrabold,sans-serif ">ADDRESS:</label><br>
+<textarea rows="10" cols="30" placeholder="type your present address"></textarea><br><br>
+<button onclick="myButton()">Submit</button>
+<input type="reset">
+<script>
+function myButton(){
+    alert("Submit button clicked!");
+ }
+
+</script>
+</fieldset>
+</form>
+</body>
+
+</html>
