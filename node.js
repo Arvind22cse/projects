@@ -3,11 +3,12 @@ var fs = require("fs");
 
 var server = http.createServer(function(request, response) {
     if (request.url == "/") {
-        // Your existing code for other routes
+        response.write("please enter exp1 or exp2 to redirect ");
+        response.end("exp1-formvalidation exp2-cgpa claculator");
     } else if (request.url == "/exp1") {
         fs.readFile("exp1.html", function(err, data) {
             if (err) {
-                console.error("Error reading form.html:", err);
+                console.error("failed to open exp1.html:", err);
                 response.writeHead(404);
                 response.end("File not found");
             } else {
@@ -18,7 +19,7 @@ var server = http.createServer(function(request, response) {
     } else if (request.url == "/exp2") {
         fs.readFile("calculator.html", function(err, data) {
             if (err) {
-                console.error("Error reading cgpa_calculator.html:", err);
+                console.error("failed to open calculator.html:", err);
                 response.writeHead(404);
                 response.end("File not found");
             } else {
@@ -32,6 +33,6 @@ var server = http.createServer(function(request, response) {
     console.log("Request Received");
 });
 
-server.listen(3000);
+server.listen(8002);
 
 console.log("Server running");
